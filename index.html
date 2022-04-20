@@ -6,16 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/816777e689.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+  <script type="text/javascript" src="script.js"></script>
+
   <div class="todo">
     <h1 class="todo__title">ToDo List</h1>
     <label class="todo__label">What do you need to do?</label>
-    <input type="text" class="todo__input" id="todo" placeholder="New task" />
-    <button type="button" onclick="add()" id="add_button">Add</button>
-
+    <input type="text" class="todo__input" id="todo_input" placeholder="New task" />
+    <input type="button" id="add_task_button" value="Add">
     <div>
       <ul class="todo__list"></ul>
     </div>
