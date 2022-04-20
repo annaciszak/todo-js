@@ -12,6 +12,13 @@ window.addEventListener("load", () => {
     for (const [key, value] of Object.entries(todo_array)) {
       const li = document.createElement("li");
 
+      li.addEventListener("click", (e) => {
+        if (e.target == e.currentTarget) {
+          li.classList.toggle("done");
+          value.done = !value.done;
+        }
+      });
+
       const delete_btn = document.createElement("i");
       delete_btn.classList.add("fas", "fa-trash", "trash");
 
