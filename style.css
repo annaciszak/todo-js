@@ -1,3 +1,99 @@
-.done {
-  text-decoration: line-through;
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body{
+  font-family: 'Lato', sans-serif;
+  background-color: #16191F;
+  color: #ADADB4;
 }
+
+.container{
+  max-width: 40rem;
+  width: 80vw;
+  margin: 0 auto;
+}
+
+#todo_input{
+  border-radius: 15px;
+  padding: 0.5rem;
+  padding-left: 0.8rem;
+  background-color: #ADADB4;
+  border: #5a5a73 1px solid;
+  color: #444454;
+}
+
+#todo_input, #todo_input::placeholder{
+  color: #444454;
+}
+
+.todo__title {
+
+}
+
+.todo__label{
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+.todo__list{
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.todo__list-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  padding: 1.3rem 2.2rem;
+  background-color: #20202D;
+  border-radius: 20px;
+  font-size: 16px;
+  border: #ADADB4 2px solid;
+
+  transition: opacity 0.4s;
+
+}
+
+.checkmark{
+  font-size: 25px;
+  margin-right: 1.5rem;
+}
+
+
+.todo__list-item .btn_group {
+  margin-left: auto;
+}
+
+.todo__list-item .btn_group i {
+  margin-left: 1rem;
+  font-size: 17px;
+}
+
+.done {
+  transition: 0.3s ease color;
+  color: #3eb333;
+}
+
+.deleted {
+ 
+  /* height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0; */
+
+
+display: none;
+    
+}
+
+/* 
+.done::before{
+  font-family: "Font Awesome 5 Free";
+  content: "\f058";
+  color: #21b942;
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+} */
