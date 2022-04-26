@@ -29,9 +29,10 @@ window.addEventListener("load", () => {
         btn_group.classList.add("btn_group");
 
         const checkmark = document.createElement("i");
-        checkmark.classList.add("fas", "fa-check-circle", "checkmark");
+        checkmark.classList.add("checkmark", "far", "fa-circle");
 
         const task_text = document.createElement("span");
+        task_text.classList.add("task-text");
         task_text.innerText = value.value;
 
         li.addEventListener("click", (e) => {
@@ -40,6 +41,9 @@ window.addEventListener("load", () => {
             e.target == li.firstChild ||
             e.target == li.children[1]
           ) {
+            li.classList.toggle("done-item");
+            checkmark.classList.toggle("fa-check-circle");
+            checkmark.classList.toggle("fa-circle");
             li.firstChild.classList.toggle("done");
             value.done = !value.done;
           }
@@ -54,8 +58,6 @@ window.addEventListener("load", () => {
             e.target.parentNode.parentNode.style.display = "none";
           }, 450);
           value.deleted = true;
-          //delete todo_array[key];
-          // delete_btn.parentNode.parentNode.remove();
         });
 
         const edit_btn = document.createElement("i");
@@ -68,7 +70,6 @@ window.addEventListener("load", () => {
           add_btn.value = "Save";
         });
 
-        // li.innerHTML = value.value;
         btn_group.appendChild(delete_btn);
         btn_group.appendChild(edit_btn);
         li.appendChild(checkmark);

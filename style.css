@@ -13,7 +13,9 @@ body{
 }
 
 #todo_input{
-  border-radius: 15px;
+  border-radius: 12px;  
+  margin-right: 1rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
   padding-left: 0.8rem;
   background-color: #ADADB4;
@@ -25,12 +27,9 @@ body{
   color: #444454;
 }
 
-.todo__title {
-
-}
-
 .todo__label{
   display: inline-block;
+  margin-right: 1rem;
   margin-bottom: 1rem;
   font-size: 20px;
 }
@@ -42,10 +41,12 @@ body{
 
 .todo__list-item{
   display: flex;
+  flex:1;
   flex-direction: row;
   align-items: center;
   margin-bottom: 0.7rem;
-  padding: 1.3rem 2.2rem;
+  padding: 1.3rem 1.7rem;
+  min-width: 10rem;
   background-color: #20202D;
   border-radius: 20px;
   font-size: 16px;
@@ -57,43 +58,65 @@ body{
 
 .checkmark{
   font-size: 25px;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
+  flex:1;
 }
 
+.task-text{
+  flex:6;
+}
+
+.btn_group{
+  display: flex;
+  flex:3;
+  justify-content: flex-end;
+}
 
 .todo__list-item .btn_group {
   margin-left: auto;
 }
 
 .todo__list-item .btn_group i {
+  display: flex;
   margin-left: 1rem;
   font-size: 17px;
 }
 
 .done {
-  transition: 0.3s ease color;
+  transition: 2s ease color;
   color: #3eb333;
 }
 
-.deleted {
- 
-  /* height: 0;
-  padding: 0;
-  margin: 0;
-  border: 0; */
-
-
-display: none;
-    
+.done-item{
+  transition: 2s ease background-color;
+  background-color: #496546;
+  border-color: #3eb333;;
 }
 
-/* 
-.done::before{
-  font-family: "Font Awesome 5 Free";
-  content: "\f058";
-  color: #21b942;
-  display: inline-block;
-  padding-right: 3px;
-  vertical-align: middle;
-  font-weight: 900;
-} */
+@media only screen and (max-width: 650px) {   
+  .task-text{
+    max-width: 60%;
+  }
+}
+
+
+#add_task_button {
+  background-color: #235e5b;
+  margin-bottom: 1rem;
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  transition: 200ms;
+  font-size: 16px;
+
+  -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+#add_task_button:hover{
+box-shadow: 0 0 40px 40px #38642a inset;
+}
