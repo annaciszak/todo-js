@@ -27,9 +27,19 @@ window.addEventListener("load", () => {
         const li = document.createElement("li");
         const btn_group = document.createElement("span");
         btn_group.classList.add("btn_group");
-
         const checkmark = document.createElement("i");
-        checkmark.classList.add("checkmark", "far", "fa-circle");
+
+        if (value.done) {
+          checkmark.classList.add(
+            "checkmark",
+            "far",
+            "fa-check-circle",
+            "done"
+          );
+          li.classList.add("done-item");
+        } else {
+          checkmark.classList.add("checkmark", "far", "fa-circle");
+        }
 
         const task_text = document.createElement("span");
         task_text.classList.add("task-text");
@@ -85,12 +95,20 @@ window.addEventListener("load", () => {
   add_btn.addEventListener("click", () => {
     if (edit_mode) {
       const edited_task = todo_array[edited_task_id];
-      edited_task.value = input.value;
+      if (input.value != "") {
+        edited_task.value = input.value;
+      }
       edit_mode = false;
       add_btn.value = "Add";
     } else {
       const new_task = document.getElementById("todo_input").value;
-      todo_array[Date.now()] = { value: new_task, done: false, deleted: false };
+      if (new_task != "") {
+        todo_array[Date.now()] = {
+          value: new_task,
+          done: false,
+          deleted: false,
+        };
+      }
     }
     display_list();
   });
