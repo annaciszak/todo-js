@@ -10,7 +10,6 @@ export class ToDo {
     }, 450);
 
     this.tasks = this.tasks.filter((element) => element.id != task_id);
-    console.log(this.tasks);
   }
 
   edit_task(task) {
@@ -48,9 +47,11 @@ export class ToDo {
         checkmark.classList.add("checkmark", "far", "fa-circle");
       }
 
-      const task_text = document.createElement("span");
-      task_text.classList.add("task-text");
-      task_text.innerText = task.value;
+      const task_input = document.createElement("input");
+      console.log(task);
+      task_input.classList.add("task-text");
+      task_input.setAttribute("value", task.value);
+      task_input.setAttribute("readonly", true);
 
       li.addEventListener("click", (e) => {
         if (
@@ -79,7 +80,7 @@ export class ToDo {
       btn_group.appendChild(delete_btn);
       btn_group.appendChild(edit_btn);
       li.appendChild(checkmark);
-      li.appendChild(task_text);
+      li.appendChild(task_input);
       li.appendChild(btn_group);
       li.classList.add("todo__list-item");
       list.appendChild(li);
