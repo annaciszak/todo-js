@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/816777e689.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://kit.fontawesome.com/816777e689.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-  <script type="text/javascript" src="main.js"></script>
-
-  <div class="todo container">
-    <h1 class="todo__title">ToDo List</h1>
-    <div class="todo__row">
-      <label class="todo__label">What do you need to do?</label>
-      <input type="text" class="todo__input" id="todo_input" placeholder="New task" />
-      <input type="button" id="add_task_button" value="Add">
+  <body>
+    <div class="todo container">
+      <h1 class="todo__title">ToDo List</h1>
+      <div class="todo__row">
+        <label class="todo__label">What do you need to do?</label>
+        <input
+          type="text"
+          class="todo__input"
+          id="todo_input"
+          placeholder="New task"
+        />
+        <input type="button" id="add_task_button" value="Add" />
+      </div>
+      <div>
+        <ul class="todo__list"></ul>
+      </div>
     </div>
-    <div>
-      <ul class="todo__list"></ul>
-    </div>
-  </div>
-</body>
-
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
