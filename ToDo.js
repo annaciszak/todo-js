@@ -4,10 +4,11 @@ export class ToDo {
   tasks = [];
 
   delete_task(e, task_id) {
+    e.target.parentNode.parentNode.style.transition = "opacity 0.4s";
     e.target.parentNode.parentNode.style.opacity = 0;
     setTimeout(() => {
       e.target.parentNode.parentNode.style.display = "none";
-    }, 450);
+    }, 400);
 
     this.tasks = this.tasks.filter((element) => element.id != task_id);
   }
@@ -73,12 +74,31 @@ export class ToDo {
             e.target == li.children[1]) &&
           !task.edit_mode
         ) {
+          if (!task.done) {
+            checkmark.classList.add("fa-check-circle");
+            checkmark.classList.remove("fa-circle");
+          } else {
+            checkmark.classList.remove("fa-check-circle");
+            checkmark.classList.add("fa-circle");
+          }
           li.classList.toggle("done-item");
-          checkmark.classList.toggle("fa-check-circle");
-          checkmark.classList.toggle("fa-circle");
           li.firstChild.classList.toggle("done");
           task_input.classList.toggle("done_task-text");
           task.done = !task.done;
+        }
+      });
+
+      li.addEventListener("mouseenter", (e) => {
+        if (!task.done) {
+          checkmark.classList.add("fa-check-circle");
+          checkmark.classList.remove("fa-circle");
+        }
+      });
+
+      li.addEventListener("mouseleave", (e) => {
+        if (!task.done) {
+          checkmark.classList.remove("fa-check-circle");
+          checkmark.classList.add("fa-circle");
         }
       });
 
@@ -91,8 +111,10 @@ export class ToDo {
       edit_btn.classList.add("fas", "fa-edit", "edit");
 
       edit_btn.addEventListener("click", (e) => {
-        task.edit_mode = !task.edit_mode;
-        this.edit_task(e, task);
+        if (!task.done) {
+          task.edit_mode = !task.edit_mode;
+          this.edit_task(e, task);
+        }
       });
 
       btn_group.appendChild(delete_btn);

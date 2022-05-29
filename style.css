@@ -52,7 +52,6 @@ body{
   font-size: 16px;
   border: #ADADB4 2px solid;
 
-  transition: opacity 0.4s;
   transition: 2s ease background-color;
 }
 
@@ -60,9 +59,6 @@ body{
   -webkit-box-shadow: 8px 8px 12px -7px rgba(80, 80, 90, 1);
   -moz-box-shadow: 8px 8px 12px -7px rgba(80, 80, 90, 1);
   box-shadow: 8px 8px 12px -7px rgba(80, 80, 90, 1);
-}
-.todo__list-item:hover i{
-  color: red;
 }
 
 .checkmark{
@@ -72,7 +68,7 @@ body{
 }
 
 .task-text{
-  flex:6;
+  flex:8;
   background-color: transparent;
   border-width: 0px;
   color: #ADADB4;
@@ -81,7 +77,7 @@ body{
 
 .btn_group{
   display: flex;
-  flex:3;
+  flex:1;
   justify-content: flex-end;
 }
 
@@ -91,7 +87,7 @@ body{
 }
 
 .todo__list-item .btn_group .trash:hover {
-  color: #ff0000;
+  color: #F92B3A;
 }
 
 .todo__list-item .btn_group .edit:hover {
