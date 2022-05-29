@@ -12,13 +12,23 @@ export class ToDo {
     this.tasks = this.tasks.filter((element) => element.id != task_id);
   }
 
-  edit_task(task) {
-    task.edit_mode = true;
-    HTMLElements.input.value = HTMLElements.li.innerText;
-    HTMLElements.add_btn.value = "Save";
+  edit_task(e, task) {
+    const task_input = e.target.parentNode.parentNode.children[1];
+    e.target.classList.toggle("fa-edit");
+    e.target.classList.toggle("fa-save");
+    // HTMLElements.input.value = HTMLElements.li.innerText;
+    if (task.edit_mode) {
+      task_input.removeAttribute("readonly");
+      task_input.removeAttribute("disabled");
+      task_input.focus();
+    } else {
+      task_input.setAttribute("readonly", true);
+      task_input.setAttribute("disabled", true);
+    }
+    task.value = task_input.value;
   }
 
-  add_task() {
+  add_task(e) {
     if (HTMLElements.input.value != "") {
       this.tasks.unshift({
         value: HTMLElements.input.value,
@@ -27,6 +37,7 @@ export class ToDo {
         id: Date.now(),
       });
     }
+    e.preventDefault();
     this.display_list();
   }
 
@@ -40,29 +51,33 @@ export class ToDo {
       btn_group.classList.add("btn_group");
       const checkmark = document.createElement("i");
 
+      const task_input = document.createElement("input");
+      task_input.classList.add("task-text");
+      task_input.setAttribute("value", task.value);
+      task_input.setAttribute("type", "text");
+      task_input.setAttribute("readonly", true);
+      task_input.setAttribute("disabled", true);
+
       if (task.done) {
         checkmark.classList.add("checkmark", "far", "fa-check-circle", "done");
         li.classList.add("done-item");
+        task_input.classList.add("done_task-text");
       } else {
         checkmark.classList.add("checkmark", "far", "fa-circle");
       }
 
-      const task_input = document.createElement("input");
-      console.log(task);
-      task_input.classList.add("task-text");
-      task_input.setAttribute("value", task.value);
-      task_input.setAttribute("readonly", true);
-
       li.addEventListener("click", (e) => {
         if (
-          e.target == e.currentTarget ||
-          e.target == li.firstChild ||
-          e.target == li.children[1]
+          (e.target == e.currentTarget ||
+            e.target == li.firstChild ||
+            e.target == li.children[1]) &&
+          !task.edit_mode
         ) {
           li.classList.toggle("done-item");
           checkmark.classList.toggle("fa-check-circle");
           checkmark.classList.toggle("fa-circle");
           li.firstChild.classList.toggle("done");
+          task_input.classList.toggle("done_task-text");
           task.done = !task.done;
         }
       });
@@ -75,7 +90,10 @@ export class ToDo {
       const edit_btn = document.createElement("i");
       edit_btn.classList.add("fas", "fa-edit", "edit");
 
-      edit_btn.addEventListener("click", (e) => this.edit_task(task));
+      edit_btn.addEventListener("click", (e) => {
+        task.edit_mode = !task.edit_mode;
+        this.edit_task(e, task);
+      });
 
       btn_group.appendChild(delete_btn);
       btn_group.appendChild(edit_btn);
