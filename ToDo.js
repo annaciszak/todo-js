@@ -19,7 +19,7 @@ export class ToDo {
     const task_input = e.target.parentNode.parentNode.children[1];
     e.target.classList.toggle("fa-edit");
     e.target.classList.toggle("fa-save");
-    // HTMLElements.input.value = HTMLElements.li.innerText;
+
     if (task.edit_mode) {
       task_input.removeAttribute("readonly");
       task_input.removeAttribute("disabled");
@@ -62,6 +62,8 @@ export class ToDo {
       this.tasks = localItems;
     }
 
+    console.log(this.tasks);
+
     for (let task of this.tasks) {
       const li = document.createElement("li");
       const btn_group = document.createElement("span");
@@ -102,6 +104,7 @@ export class ToDo {
           task_input.classList.toggle("done_task-text");
           task.done = !task.done;
         }
+        localStorage.setItem("localTasks", JSON.stringify(this.tasks));
       });
 
       li.addEventListener("mouseenter", (e) => {
