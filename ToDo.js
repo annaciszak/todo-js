@@ -11,6 +11,8 @@ export class ToDo {
     }, 400);
 
     this.tasks = this.tasks.filter((element) => element.id != task_id);
+
+    localStorage.setItem("localTasks", JSON.stringify(this.tasks));
   }
 
   edit_task(e, task) {
@@ -31,12 +33,19 @@ export class ToDo {
 
   add_task(e) {
     if (HTMLElements.input.value != "") {
+      let localItems = JSON.parse(localStorage.getItem("localTasks"));
+      if (localItems == null) {
+        this.tasks = [];
+      } else {
+        this.tasks = localItems;
+      }
       this.tasks.unshift({
         value: HTMLElements.input.value,
         done: false,
         edit_mode: false,
         id: Date.now(),
       });
+      localStorage.setItem("localTasks", JSON.stringify(this.tasks));
     }
     e.preventDefault();
     this.display_list();
@@ -45,6 +54,13 @@ export class ToDo {
   display_list() {
     const list = document.querySelector("ul.todo__list");
     list.innerHTML = "";
+
+    let localItems = JSON.parse(localStorage.getItem("localTasks"));
+    if (localItems == null) {
+      this.tasks = [];
+    } else {
+      this.tasks = localItems;
+    }
 
     for (let task of this.tasks) {
       const li = document.createElement("li");
