@@ -43,7 +43,7 @@ export class ToDo {
   }
 
   display_list() {
-    const list = document.getElementsByClassName("todo__list")[0];
+    const list = document.querySelector("ul.todo__list");
     list.innerHTML = "";
 
     for (let task of this.tasks) {
@@ -128,5 +128,3 @@ export class ToDo {
     HTMLElements.input.value = "";
   }
 }
-
-console.log("dupa");

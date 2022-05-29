@@ -12,7 +12,7 @@ body{
   margin: 0 auto;
 }
 
-#todo_input{
+.todo__input{
   border-radius: 12px;  
   margin-right: 1rem;
   margin-bottom: 1rem;
@@ -23,7 +23,7 @@ body{
   color: #444454;
 }
 
-#todo_input, #todo_input::placeholder{
+.todo__input, .todo__input::placeholder{
   color: #444454;
 }
 
@@ -122,7 +122,7 @@ body{
 }
 
 
-#add_task_button {
+.add-task__button {
   background-color: #235e5b;
   margin-bottom: 1rem;
   padding: 10px 15px;
@@ -139,6 +139,6 @@ body{
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 
-#add_task_button:hover{
+.add-task__button:hover{
 box-shadow: 0 0 40px 40px #38642a inset;
 }
