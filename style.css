@@ -1,9 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+:root{
+
+  --color-main: #ADADB4;
+  --color-main-bg: #16191F;
+  --color-add-button: #235e5b;
+  --color-add-button-hover: #38642a;
+  --color-input: #444454;
+  --color-input-border: #5a5a73;
+  --color-item-bg: #20202D;
+  --color-done: #3eb333;
+  --color-done-bg: #496546;
+  --color-trash-hover: #F92B3A;
+  --color-edit-hover:#fff68f;
+  --color-black: #000;
+}
+
 body{
   font-family: 'Lato', sans-serif;
-  background-color: #16191F;
-  color: #ADADB4;
+  background-color: var(--color-main-bg);
+  color: var(--color-main);
 }
 
 .container{
@@ -18,13 +34,12 @@ body{
   margin-bottom: 1rem;
   padding: 0.5rem;
   padding-left: 0.8rem;
-  background-color: #ADADB4;
-  border: #5a5a73 1px solid;
-  color: #444454;
+  background-color: var(--color-main);
+  border: var(--color-input-border) 1px solid;
 }
 
 .todo__input, .todo__input::placeholder{
-  color: #444454;
+  color: var(--color-input);
 }
 
 .todo__label{
@@ -47,10 +62,10 @@ body{
   margin-bottom: 0.7rem;
   padding: 1.3rem 1.7rem;
   min-width: 10rem;
-  background-color: #20202D;
+  background-color: var(--color-item-bg);
   border-radius: 20px;
   font-size: 16px;
-  border: #ADADB4 2px solid;
+  border: var(--color-main) 2px solid;
 
   transition: 2s ease background-color, 0.4s opacity;
 }
@@ -71,7 +86,7 @@ body{
   flex:8;
   background-color: transparent;
   border-width: 0px;
-  color: #ADADB4;
+  color: var(--color-main);
   transition: 0s;
 }
 
@@ -87,11 +102,11 @@ body{
 }
 
 .todo__list-item .btn_group .trash:hover {
-  color: #F92B3A;
+  color: var(--color-trash-hover);
 }
 
 .todo__list-item .btn_group .edit:hover {
-  color: #fff68f;
+  color: var(--color-edit-hover);
 }
 
 
@@ -103,12 +118,12 @@ body{
 }
 
 .done {
-  color: #3eb333;
+  color: var(--color-done);
 }
 
 .done-item{
-  background-color: #496546;
-  border-color: #3eb333;;
+  background-color: var(--color-done-bg);
+  border-color: var(--color-done);
 }
 
 .done_task-text{
@@ -121,14 +136,13 @@ body{
   }
 }
 
-
 .add-task__button {
-  background-color: #235e5b;
+  background-color: var(--color-add-button);
   margin-bottom: 1rem;
   padding: 10px 15px;
   border: 0;
   border-radius: 12px;
-  color: #000;
+  color: var(--color-black);
   cursor: pointer;
   font-weight: bold;
   text-align: center;
@@ -140,5 +154,5 @@ body{
 }
 
 .add-task__button:hover{
-box-shadow: 0 0 40px 40px #38642a inset;
+box-shadow: 0 0 40px 40px var(--color-add-button-hover) inset;
 }
