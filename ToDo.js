@@ -4,9 +4,10 @@ export class ToDo {
   tasks = [];
 
   delete_task(e, task_id) {
-    e.target.parentNode.parentNode.style.opacity = 0;
+    const { parentNode } = e.target.parentNode;
+    parentNode.style.opacity = 0;
     setTimeout(() => {
-      e.target.parentNode.parentNode.style.display = "none";
+      parentNode.style.display = "none";
     }, 400);
 
     this.tasks = this.tasks.filter((element) => element.id != task_id);
@@ -15,9 +16,10 @@ export class ToDo {
   }
 
   edit_task(e, task) {
+    const { classList } = e.target;
     const task_input = e.target.parentNode.parentNode.children[1];
-    e.target.classList.toggle("fa-edit");
-    e.target.classList.toggle("fa-save");
+    classList.toggle("fa-edit");
+    classList.toggle("fa-save");
 
     if (task.edit_mode) {
       task_input.removeAttribute("readonly");
