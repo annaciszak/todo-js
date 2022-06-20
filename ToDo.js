@@ -4,7 +4,6 @@ export class ToDo {
   tasks = [];
 
   delete_task(e, task_id) {
-    e.target.parentNode.parentNode.style.transition = "opacity 0.4s";
     e.target.parentNode.parentNode.style.opacity = 0;
     setTimeout(() => {
       e.target.parentNode.parentNode.style.display = "none";
