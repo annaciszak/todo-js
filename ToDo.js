@@ -15,12 +15,36 @@ export class ToDo {
     localStorage.setItem("localTasks", JSON.stringify(this.tasks));
   }
 
-  edit_task(e, task) {
+  toggle_edit_icon_button(e, task) {
     const { classList } = e.target;
-    const task_input = e.target.parentNode.parentNode.children[1];
     classList.toggle("fa-edit");
     classList.toggle("fa-save");
+  }
 
+  toggle_edit_icon_enter(e, task) {
+    const { classList } = e.target.parentNode.children[2].children[1];
+    console.log(classList);
+    classList.toggle("fa-edit");
+    classList.toggle("fa-save");
+  }
+
+  toggle_edit_mode_button(e, task) {
+    const task_input = e.target.parentNode.parentNode.children[1];
+    console.log("HUHU" + task.edit_mode);
+    if (task.edit_mode) {
+      task_input.removeAttribute("readonly");
+      task_input.removeAttribute("disabled");
+      task_input.focus();
+    } else {
+      task_input.setAttribute("readonly", true);
+      task_input.setAttribute("disabled", true);
+    }
+    task.value = task_input.value;
+  }
+
+  toggle_edit_mode_enter(e, task) {
+    const task_input = e.target;
+    console.log("HUHU" + task.edit_mode);
     if (task.edit_mode) {
       task_input.removeAttribute("readonly");
       task_input.removeAttribute("disabled");
@@ -133,7 +157,17 @@ export class ToDo {
       edit_btn.addEventListener("click", (e) => {
         if (!task.done) {
           task.edit_mode = !task.edit_mode;
-          this.edit_task(e, task);
+          this.toggle_edit_icon_button(e, task);
+          this.toggle_edit_mode_button(e, task);
+        }
+      });
+
+      task_input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          task.edit_mode = !task.edit_mode;
+          this.toggle_edit_icon_enter(e, task);
+          this.toggle_edit_mode_enter(e, task);
         }
       });
 
