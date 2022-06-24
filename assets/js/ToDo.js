@@ -1,7 +1,11 @@
 import { HTMLElements } from "./HTMLElements";
+import { MyLocalStorage } from "./MyLocalStorage";
 
 export class ToDo {
-  tasks = [];
+  constructor() {
+    this.tasks = [];
+    this.localStorage = new MyLocalStorage();
+  }
 
   delete_task(e, task_id) {
     const { parentNode } = e.target.parentNode;
@@ -12,7 +16,7 @@ export class ToDo {
 
     this.tasks = this.tasks.filter((element) => element.id != task_id);
 
-    localStorage.setItem("localTasks", JSON.stringify(this.tasks));
+    this.localStorage.set_tasks(this.tasks);
   }
 
   toggle_edit_icon_button(e, task) {
@@ -23,14 +27,12 @@ export class ToDo {
 
   toggle_edit_icon_enter(e, task) {
     const { classList } = e.target.parentNode.children[2].children[1];
-    console.log(classList);
     classList.toggle("fa-edit");
     classList.toggle("fa-save");
   }
 
   toggle_edit_mode_button(e, task) {
     const task_input = e.target.parentNode.parentNode.children[1];
-    console.log("HUHU" + task.edit_mode);
     if (task.edit_mode) {
       task_input.removeAttribute("readonly");
       task_input.removeAttribute("disabled");
@@ -44,7 +46,6 @@ export class ToDo {
 
   toggle_edit_mode_enter(e, task) {
     const task_input = e.target;
-    console.log("HUHU" + task.edit_mode);
     if (task.edit_mode) {
       task_input.removeAttribute("readonly");
       task_input.removeAttribute("disabled");
@@ -58,7 +59,7 @@ export class ToDo {
 
   add_task(e) {
     if (HTMLElements.input.value != "") {
-      let localItems = JSON.parse(localStorage.getItem("localTasks"));
+      let localItems = this.localStorage.get_tasks();
       if (localItems == null) {
         this.tasks = [];
       } else {
@@ -70,7 +71,7 @@ export class ToDo {
         edit_mode: false,
         id: Date.now(),
       });
-      localStorage.setItem("localTasks", JSON.stringify(this.tasks));
+      this.localStorage.set_tasks(this.tasks);
     }
     e.preventDefault();
     this.display_list();
@@ -79,15 +80,12 @@ export class ToDo {
   display_list() {
     const list = document.querySelector("ul.todo__list");
     list.innerHTML = "";
-
-    let localItems = JSON.parse(localStorage.getItem("localTasks"));
+    let localItems = this.localStorage.get_tasks();
     if (localItems == null) {
       this.tasks = [];
     } else {
       this.tasks = localItems;
     }
-
-    console.log(this.tasks);
 
     for (let task of this.tasks) {
       const li = document.createElement("li");
@@ -129,7 +127,7 @@ export class ToDo {
           task_input.classList.toggle("done_task-text");
           task.done = !task.done;
         }
-        localStorage.setItem("localTasks", JSON.stringify(this.tasks));
+        this.localStorage.set_tasks(this.tasks);
       });
 
       li.addEventListener("mouseenter", (e) => {
