@@ -2,13 +2,13 @@ describe("Add new task", () => {
   it("passes", () => {
     cy.visit("http://localhost:3000");
 
-    cy.get(".todo__input").type("aaaa");
+    cy.get(".todo__input").type("Finish presentation");
     cy.get(".add-task__button").click();
 
-    cy.get(".todo__input").type("huhu");
+    cy.get(".todo__input").type("Meet with Amy");
     cy.get(".add-task__button").click();
 
-    cy.get(".task-text").should("have.value", "huhu");
+    cy.get(".task-text").should("have.value", "Meet with Amy");
   });
 });
 
@@ -16,10 +16,10 @@ describe("Delete task", () => {
   it("passes", () => {
     cy.visit("http://localhost:3000");
 
-    cy.get(".todo__input").type("huhu");
+    cy.get(".todo__input").type("Finish presentation");
     cy.get(".add-task__button").click();
 
-    cy.get(".todo__input").type("aaaa");
+    cy.get(".todo__input").type("Meet with Amy");
     cy.get(".add-task__button").click();
 
     cy.get(".trash:first").click();
@@ -31,16 +31,16 @@ describe("Set task as done", () => {
   it("passes", () => {
     cy.visit("http://localhost:3000");
 
-    cy.get(".todo__input").type("huhu");
+    cy.get(".todo__input").type("Meet with Amy");
     cy.get(".add-task__button").click();
 
-    cy.get(".todo__input").type("aaaa");
+    cy.get(".todo__input").type("Finish presentation");
     cy.get(".add-task__button").click();
 
-    cy.get(".todo__input").type("huhu");
+    cy.get(".todo__input").type("Repair laptop");
     cy.get(".add-task__button").click();
 
-    cy.get(".todo__input").type("aaaa");
+    cy.get(".todo__input").type("Training");
     cy.get(".add-task__button").click();
 
     cy.get(".todo__list-item").eq(2).click();
