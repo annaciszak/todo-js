@@ -2,11 +2,19 @@ import { HTMLElements } from "./HTMLElements";
 import { MyLocalStorage } from "./MyLocalStorage";
 
 export class ToDo {
+  /**
+   * @constructor
+   */
   constructor() {
     this.tasks = [];
     this.localStorage = new MyLocalStorage();
   }
 
+  /**
+   * Delete the task from todo list.
+   * @param {Object} e - Pointer event from clicking trash icon.
+   * @param {number} task_id - The task id.
+   */
   delete_task(e, task_id) {
     const { parentNode } = e.target.parentNode;
     parentNode.style.opacity = 0;
@@ -19,18 +27,31 @@ export class ToDo {
     this.localStorage.set_tasks(this.tasks);
   }
 
-  toggle_edit_icon_button(e, task) {
+  /**
+   * Toggle edit mode by clicking Enter.
+   * @param {Object} e - Pointer event from clicking Save icon.
+   */
+  toggle_edit_icon_button(e) {
     const { classList } = e.target;
     classList.toggle("fa-edit");
     classList.toggle("fa-save");
   }
 
-  toggle_edit_icon_enter(e, task) {
+  /**
+   * Toggle edit icon by pressing Enter.
+   * @param {Object} e - Pointer event from pressing key on task input.
+   */
+  toggle_edit_icon_enter(e) {
     const { classList } = e.target.parentNode.children[2].children[1];
     classList.toggle("fa-edit");
     classList.toggle("fa-save");
   }
 
+  /**
+   * Toggle edit mode by clicking Save icon.
+   * @param {Object} e - Pointer event from clicking save icon.
+   * @param {Object} task - The task being edited.
+   */
   toggle_edit_mode_button(e, task) {
     const task_input = e.target.parentNode.parentNode.children[1];
     if (task.edit_mode) {
@@ -44,6 +65,11 @@ export class ToDo {
     task.value = task_input.value;
   }
 
+  /**
+   * Toggle edit mode by pressing Enter.
+   * @param {Object} e - Pointer event from pressing key on task input.
+   * @param {Object} task - The task being edited.
+   */
   toggle_edit_mode_enter(e, task) {
     const task_input = e.target;
     if (task.edit_mode) {
@@ -57,6 +83,10 @@ export class ToDo {
     task.value = task_input.value;
   }
 
+  /**
+   * Add new task to list.
+   * @param {Object} e - Pointer event from clicking on Add button.
+   */
   add_task(e) {
     if (HTMLElements.input.value != "") {
       let localItems = this.localStorage.get_tasks();
@@ -77,6 +107,9 @@ export class ToDo {
     this.display_list();
   }
 
+  /**
+   * Displays list of tasks.
+   */
   display_list() {
     const list = document.querySelector("ul.todo__list");
     list.innerHTML = "";
