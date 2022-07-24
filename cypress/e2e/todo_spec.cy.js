@@ -1,31 +1,35 @@
+/// <reference types="Cypress" />
+
 describe("Tests", () => {
   it("Add new task", () => {
     cy.visit("http://localhost:3000");
 
-    cy.get(".todo__input").type("Meet with Amy");
-    cy.get(".add-task__button").click();
+    cy.get('[data-cy="add__task-input"]').type("Meet with Amy");
+    cy.get('[data-cy="add__task-submit"]').click();
 
-    cy.get(".task-text").should("have.value", "Meet with Amy");
+    cy.get('[data-cy="task__text"]').should("have.value", "Meet with Amy");
   });
 
   it("Delete task", () => {
     cy.visit("http://localhost:3000");
 
-    cy.get(".todo__input").type("Finish presentation");
-    cy.get(".add-task__button").click();
+    cy.get('[data-cy="add__task-input"]').type("Finish presentation");
+    cy.get('[data-cy="add__task-submit"]').click();
 
-    cy.get(".trash:first").click();
-    cy.get("todo__list-item").should("not.exist");
+    cy.get('[data-cy="trash__icon"]').first().click();
+    cy.get('[data-cy="todo__list-item"]').should("not.exist");
   });
 
   it("Set task as done", () => {
     cy.visit("http://localhost:3000");
 
-    cy.get(".todo__input").type("Finish presentation");
-    cy.get(".add-task__button").click();
+    cy.get('[data-cy="add__task-input"]').type("Finish presentation");
+    cy.get('[data-cy="add__task-submit"]').click();
 
-    cy.get(".todo__list-item").eq(0).click();
+    cy.get('[data-cy="todo__list-item"]').first().click();
 
-    cy.get(".todo__list-item").eq(0).should("have.class", "done-item");
+    cy.get('[data-cy="todo__list-item"]')
+      .first()
+      .should("have.class", "done-item");
   });
 });
