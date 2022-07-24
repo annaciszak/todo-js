@@ -1,3 +1,10 @@
+/**
+ * @typedef {{
+ *  target: object,
+ *  currentTarget: object
+ * }} MouseEventParams
+ */
+
 import { HTMLElements } from "./HTMLElements";
 import { MyLocalStorage } from "./MyLocalStorage";
 
@@ -12,7 +19,8 @@ export class ToDo {
 
   /**
    * Delete the task from todo list.
-   * @param {Object} e - Pointer event from clicking trash icon.
+   * @listens document#mousedown
+   * @param {document#event:mousedown} e
    * @param {number} task_id - The task id.
    */
   deleteTask(e, task_id) {
