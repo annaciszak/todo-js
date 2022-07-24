@@ -6,5 +6,7 @@ window.addEventListener("load", () => {
 
   todo.displayList();
 
+  todo.tasks.forEach((task) => task.edit_mode == false);
+
   HTMLElements.add_btn.addEventListener("click", todo.addTask.bind(todo));
 });

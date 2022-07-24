@@ -14,6 +14,7 @@ export class ToDo {
    */
   constructor() {
     this.tasks = [];
+    this.edit_target = null;
     this.localStorage = new MyLocalStorage();
   }
 
@@ -28,6 +29,7 @@ export class ToDo {
     parentNode.style.opacity = 0;
     setTimeout(() => {
       parentNode.style.display = "none";
+      this.displayList();
     }, 400);
 
     this.tasks = this.tasks.filter((element) => element.id != task_id);
@@ -36,23 +38,12 @@ export class ToDo {
   }
 
   /**
-   * Toggle edit mode by clicking Enter.
+   * Toggle edit mode by Event.
    * @param {Object} e - Pointer event from clicking Save icon.
    */
-  toggleEditIconButton(e) {
-    const { classList } = e.target;
-    classList.toggle("fa-edit");
-    classList.toggle("fa-save");
-  }
-
-  /**
-   * Toggle edit icon by pressing Enter.
-   * @param {Object} e - Pointer event from pressing key on task input.
-   */
-  toggleEditIconEnter(e) {
-    const { classList } = e.target.parentNode.children[2].children[1];
-    classList.toggle("fa-edit");
-    classList.toggle("fa-save");
+  toggleEditIcon(element) {
+    element.classList.toggle("fa-edit");
+    element.classList.toggle("fa-save");
   }
 
   /**
@@ -60,8 +51,8 @@ export class ToDo {
    * @param {Object} e - Pointer event from clicking save icon.
    * @param {Object} task - The task being edited.
    */
-  toggleEditModeButton(e, task) {
-    const task_input = e.target.parentNode.parentNode.children[1];
+  toggleEditMode(element, task) {
+    const task_input = element;
     if (task.edit_mode) {
       task_input.removeAttribute("readonly");
       task_input.removeAttribute("disabled");
@@ -71,24 +62,7 @@ export class ToDo {
       task_input.setAttribute("disabled", true);
     }
     task.value = task_input.value;
-  }
-
-  /**
-   * Toggle edit mode by pressing Enter.
-   * @param {Object} e - Pointer event from pressing key on task input.
-   * @param {Object} task - The task being edited.
-   */
-  toggleEditModeEnter(e, task) {
-    const task_input = e.target;
-    if (task.edit_mode) {
-      task_input.removeAttribute("readonly");
-      task_input.removeAttribute("disabled");
-      task_input.focus();
-    } else {
-      task_input.setAttribute("readonly", true);
-      task_input.setAttribute("disabled", true);
-    }
-    task.value = task_input.value;
+    this.localStorage.setTasks(this.tasks);
   }
 
   /**
@@ -140,6 +114,12 @@ export class ToDo {
       task_input.setAttribute("type", "text");
       task_input.setAttribute("readonly", true);
       task_input.setAttribute("disabled", true);
+      task_input.onblur = (e) => {
+        task.edit_mode = false;
+        this.edit_target = null;
+        this.toggleEditIcon(e.target.parentNode.children[2].children[1]);
+        this.toggleEditMode(e.target, task);
+      };
 
       if (task.done) {
         checkmark.classList.add("checkmark", "far", "fa-check-circle", "done");
@@ -195,9 +175,23 @@ export class ToDo {
 
       edit_btn.addEventListener("click", (e) => {
         if (!task.done) {
-          task.edit_mode = !task.edit_mode;
-          this.toggleEditIconButton(e, task);
-          this.toggleEditModeButton(e, task);
+          if (e.target == this.edit_target) {
+            task.edit_mode = false;
+            this.edit_target = null;
+            this.toggleEditIcon(e.target);
+            this.toggleEditMode(
+              e.target.parentNode.parentNode.children[1],
+              task
+            );
+          } else if (this.edit_target == null) {
+            task.edit_mode = true;
+            this.edit_target = e.target;
+            this.toggleEditIcon(e.target);
+            this.toggleEditMode(
+              e.target.parentNode.parentNode.children[1],
+              task
+            );
+          }
         }
       });
 
@@ -205,8 +199,8 @@ export class ToDo {
         if (e.key === "Enter") {
           e.preventDefault();
           task.edit_mode = !task.edit_mode;
-          this.toggleEditIconEnter(e, task);
-          this.toggleEditModeEnter(e, task);
+          this.toggleEditIcon(e.target.parentNode.children[2].children[1]);
+          this.toggleEditMode(e.target, task);
         }
       });
 
