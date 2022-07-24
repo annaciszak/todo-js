@@ -112,6 +112,7 @@ export class ToDo {
       task_input.classList.add("task-text");
       task_input.setAttribute("value", task.value);
       task_input.setAttribute("type", "text");
+      task_input.setAttribute("data-cy", "task__text");
       task_input.setAttribute("readonly", true);
       task_input.setAttribute("disabled", true);
       task_input.onblur = (e) => {
@@ -167,6 +168,7 @@ export class ToDo {
 
       const delete_btn = document.createElement("i");
       delete_btn.classList.add("fas", "fa-trash", "trash");
+      delete_btn.setAttribute("data-cy", "trash__icon");
 
       delete_btn.addEventListener("click", (e) => this.deleteTask(e, task.id));
 
@@ -210,6 +212,7 @@ export class ToDo {
       li.appendChild(task_input);
       li.appendChild(btn_group);
       li.classList.add("todo__list-item");
+      li.setAttribute("data-cy", "todo__list-item");
       list.appendChild(li);
     }
     HTMLElements.input.value = "";
